@@ -1,3 +1,4 @@
+package game;
 
 /** Fan Engine by Matthew Shepard
  *  November 2023
@@ -54,7 +55,7 @@ public class Ball {
 	}
 	
 	public void Paint (Graphics g) {
-		g.setColor (Color.black);
+		g.setColor(Color.black);
 		g.fillOval((int) x - 12, (int) y - 12, size, size);
 	}
 	

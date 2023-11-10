@@ -1,18 +1,20 @@
+package game;
+
 import java.awt.Color;
+/** Fan Engine by Matthew Shepard
+ *  November 2023
+ */
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-
-/** Fan Engine by Matthew Shepard
- *  November 2023
- */
 
 public class Level {
 	
 	int levelNumber;
 	ArrayList <Wall> walls = new ArrayList<>();
 	Goal goal;
+	double rotation;
 	
 	public Level (int level) {
 		levelNumber = level;
