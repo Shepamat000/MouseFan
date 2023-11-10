@@ -13,7 +13,7 @@ public class Level {
 	
 	public Level (int level) {
 		levelNumber = level;
-		goal = new Goal (1700, 200, 50);
+		goal = new Goal (Engine.screenWidth - (Engine.screenWidth/10), Engine.screenHeight/10, 50);
 	}
 	
 	public void paint (Graphics g) {

@@ -41,12 +41,12 @@ public class Ball {
 			y += 10;
 		}
 		
-		if (x > 1870) {
+		if (x > Engine.screenWidth - 50) {
 			velX = -velX;
 			x -= 10;
 		}
 		
-		if (y > 1030) {
+		if (y > Engine.screenHeight - 50) {
 			velY = -velY;
 			y -= 10;
 		}

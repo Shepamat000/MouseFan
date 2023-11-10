@@ -1,6 +1,8 @@
 /** Fan Engine by Matthew Shepard
  *  November 2023
  */
+
+import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -11,8 +13,13 @@ public class Engine extends JFrame {
 	View view;
 	Controller controller;
 	Level levelOne;
+	public static int screenWidth = 1920;
+	public static int screenHeight = 1080;
 	
 	public Engine () {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		screenWidth = screenSize.width;
+		screenHeight = screenSize.height;
 		levelOne = new Level(1);		
 		controller = new Controller();
 		view = new View(controller, levelOne);
@@ -21,7 +28,7 @@ public class Engine extends JFrame {
 		this.addMouseMotionListener (controller);
 		
 		this.setTitle("Fan Game");
-		this.setSize(1920, 1080);
+		this.setSize(screenWidth, screenHeight);
 		this.setFocusable(true);
 		this.getContentPane().add(view);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
