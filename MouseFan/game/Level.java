@@ -1,3 +1,5 @@
+package game;
+
 import java.awt.Color;
 /** Fan Engine by Matthew Shepard
  *  November 2023

@@ -1,3 +1,5 @@
+package game;
+
 /** Fan Engine by Matthew Shepard
  *  November 2023
  */
