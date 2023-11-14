@@ -8,6 +8,5 @@ git clone --recurse-submodules https://github.com/Shepamat000/MouseFan
 cd ./MouseFan
 cd ./MouseFan
 FanEngine.bat
-
 ```
 Note: If using Windows Powershell, you must replace the final command with "./FanEngine.bat"
