@@ -44,6 +44,11 @@ public class Controller implements ActionListener, MouseMotionListener, MouseLis
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		switch (e.getKeyCode()) {
+			// test
+			case KeyEvent.VK_SPACE:
+				Ball.dead = true;
+		}
 		
 	}
 

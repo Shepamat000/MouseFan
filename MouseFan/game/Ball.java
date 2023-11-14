@@ -14,16 +14,43 @@ public class Ball {
 	float velX = 0;
 	float velY = 0;
 	
+	public static boolean dead; 
+	int animationTimer = 0;
+	
 	public Ball (float xPos, float yPos) {
 		x = xPos;
 		y = yPos;
 	}
 	
+	public void Paint (Graphics g) {
+		g.setColor(Color.black);
+		if (!dead) g.fillOval((int) x - 12, (int) y - 12, size, size);
+		// Death animation
+		else {
+			g.fillOval((int) x - animationTimer, (int) y - animationTimer, size/4, size/4);
+			g.fillOval((int) x + animationTimer, (int) y - animationTimer, size/4, size/4);
+			g.fillOval((int) x - animationTimer, (int) y + animationTimer, size/4, size/4);
+			g.fillOval((int) x + animationTimer, (int) y + animationTimer, size/4, size/4);
+			animationTimer += 2;
+		}
+	}
+	
+	
 	public void update (Level l) {
-		x += velX;
-		y += velY;
+		if (dead) return; // Do not run if dead
 		
-		checkForCollisions(l);
+		x += velX;
+		// X collision check
+		if (checkForCollisions(l)) {
+			x -= velX;
+			velX = -velX;
+		}
+		y += velY;
+		// Y collision Check 
+		if (checkForCollisions(l)) {
+			y -= velY;
+			velY = -velY;
+		}
 		
 		// Slows down ball if it has velocity 
 		velX -= velX/100;
@@ -54,18 +81,26 @@ public class Ball {
 		
 	}
 	
-	public void Paint (Graphics g) {
-		g.setColor(Color.black);
-		g.fillOval((int) x - 12, (int) y - 12, size, size);
-	}
-	
-	public void checkForCollisions (Level level) {
+	// Collision check
+	public boolean checkForCollisions (Level level) {
 		double distance = Math.sqrt((level.goal.x - x) * (level.goal.x - x) + (level.goal.y - y) * (level.goal.y - y));
 		if (distance < level.goal.size/2 + size/2) {
 			x = 200;
 			y = 200; 
 			level.levelNumber++;
 		}
+		
+		// Main collision logic for walls
+		for (int i = 0; i < level.walls.size(); i++) {
+			if (x + size/2 > level.walls.get(i).x && x - size/2 < level.walls.get(i).x + level.walls.get(i).width) {
+				if (y + size/2 > level.walls.get(i).y && y - size/2 < level.walls.get(i).y + level.walls.get(i).length) {
+					if (level.walls.get(i).type == 2) dead = true; // Player dies if lava
+					return true;
+				}
+			}
+		}
+		
+		return false;
 		
 	}
 }
