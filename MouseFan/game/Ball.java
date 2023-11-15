@@ -7,7 +7,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Ball {
-
+	
+	float startX, startY;
 	float x;
 	float y; 
 	int size = 25;
@@ -20,6 +21,8 @@ public class Ball {
 	public Ball (float xPos, float yPos) {
 		x = xPos;
 		y = yPos;
+		startX = xPos;
+		startY = yPos;
 	}
 	
 	public void Paint (Graphics g) {
@@ -102,5 +105,17 @@ public class Ball {
 		
 		return false;
 		
+	}
+	
+	public boolean revive () {
+		if (dead) {
+			x = startX;
+			y = startY;
+			dead = false; 
+			animationTimer = 0;
+			return true; 
+		} else {
+			return false;
+		}
 	}
 }
