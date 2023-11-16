@@ -14,7 +14,7 @@ public class Engine extends JFrame {
 	
 	View view;
 	Controller controller;
-	Level levelOne;
+	static Level levelOne;
 	public static int screenWidth = 1920;
 	public static int screenHeight = 1080;
 	

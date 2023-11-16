@@ -13,9 +13,12 @@ import java.awt.event.MouseMotionListener;
 
 public class Controller implements ActionListener, MouseMotionListener, MouseListener, KeyListener{
 	
-	int mouseX;
-	int mouseY;
+	public static int mouseX;
+	public static int mouseY;
 	static float angle;
+	public static boolean editMode;
+	
+	public static int currentSelectionX, currentSelectionY;	
 
 	public void update() {
 		float xDist = Math.abs(mouseX - (int) View.ball.x);
@@ -45,9 +48,12 @@ public class Controller implements ActionListener, MouseMotionListener, MouseLis
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
-			// test
+			// Revive Player
 			case KeyEvent.VK_R:
 				View.ball.revive();
+			// Edit mode
+			case KeyEvent.VK_E:
+				editMode = !editMode;
 		}
 		
 	}
@@ -79,7 +85,16 @@ public class Controller implements ActionListener, MouseMotionListener, MouseLis
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		
+		if (editMode) {
+			if (currentSelectionX == 0 && currentSelectionY == 0) {
+				currentSelectionX = e.getX();
+				currentSelectionY = e.getY();
+			} else {
+				Engine.levelOne.createNewWall(mouseX, mouseY, currentSelectionX, currentSelectionY);
+				currentSelectionX = 0;
+				currentSelectionY = 0;
+			}
+		}
 	}
 
 	@Override

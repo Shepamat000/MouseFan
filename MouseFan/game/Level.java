@@ -15,11 +15,12 @@ public class Level {
 	public ArrayList <Wall> walls = new ArrayList<>();
 	Goal goal;
 	double rotation;
-	
+
 	//TODO: Implement better method of relative positioning
 	public Level (int level) {
 		levelNumber = level;
 		goal = new Goal (Engine.screenWidth - (Engine.screenWidth/10), Engine.screenHeight/10, 70);
+		
 		
 		Wall testWall = new basicWall(Engine.screenWidth/6, 0, Engine.screenHeight/8, Engine.screenHeight - Engine.screenHeight/5, 0, false);
 		walls.add(testWall);
@@ -36,6 +37,20 @@ public class Level {
 		for (int i = 0; i < walls.size(); i++) {
 			walls.get(i).paint(g);
 		}
+	}
+
+	// Create a new wall between given coordinates
+	public void createNewWall(int x1, int y1, int x2, int y2) {
+		int wallX, wallY;
+		
+		if (x1 > x2) wallX =  x2;
+		else wallX = x1;
+		
+		if (y1 > y2) wallY = y2;
+		else wallY = y1;
+		
+		Wall newWall = new basicWall (wallX, wallY, Math.abs(x1 - x2), Math.abs(y1-y2), 0, false);
+		walls.add(newWall);
 	}
 
 }
