@@ -95,12 +95,19 @@ public class Ball {
 		
 		// Main collision logic for walls
 		for (int i = 0; i < level.walls.size(); i++) {
-			if (x + size/2 > level.walls.get(i).x && x - size/2 < level.walls.get(i).x + level.walls.get(i).width) {
-				if (y + size/2 > level.walls.get(i).y && y - size/2 < level.walls.get(i).y + level.walls.get(i).length) {
+			// Rotate circle's center point back
+			double rotatedCircleX = Math.cos(Math.toRadians(-level.walls.get(i).rotation)) * (x - (level.walls.get(i).x + (level.walls.get(i).width/2))) - 
+			        Math.sin(Math.toRadians(-level.walls.get(i).rotation)) * (y - (level.walls.get(i).y + (level.walls.get(i).length/2))) + (level.walls.get(i).x + (level.walls.get(i).width/2));
+			double rotatedCircleY  = Math.sin(Math.toRadians(-level.walls.get(i).rotation)) * (x - (level.walls.get(i).x + (level.walls.get(i).width/2))) + 
+			        Math.cos(Math.toRadians(-level.walls.get(i).rotation)) * (y - (level.walls.get(i).y + (level.walls.get(i).length/2))) + (level.walls.get(i).y + (level.walls.get(i).length/2));
+			
+			if (rotatedCircleX + size/2 > level.walls.get(i).x && rotatedCircleX - size/2 < level.walls.get(i).x + level.walls.get(i).width) {
+				if (rotatedCircleY + size/2 > level.walls.get(i).y && rotatedCircleY - size/2 < level.walls.get(i).y + level.walls.get(i).length) {
 					if (level.walls.get(i).type == 2) dead = true; // Player dies if lava
 					return true;
 				}
 			}
+		
 		}
 		
 		return false;

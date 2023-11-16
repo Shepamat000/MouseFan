@@ -27,7 +27,7 @@ public class Level {
 		Wall testWall2 = new basicWall(4 * Engine.screenWidth/6, Engine.screenHeight/5, Engine.screenHeight/8, 4 * Engine.screenHeight/5, 0, false);
 		walls.add(testWall2);
 		
-		Lava testObstacle1 = new Lava(3 * Engine.screenWidth/7, Engine.screenHeight/2 - Engine.screenHeight/5, Engine.screenHeight/5, Engine.screenHeight/5, 0, false);
+		Lava testObstacle1 = new Lava(2 * Engine.screenWidth/7, Engine.screenHeight/2 - Engine.screenHeight/10, Engine.screenWidth/3, Engine.screenHeight/10, 0, true);
 		walls.add(testObstacle1);
 	}
 	
@@ -85,10 +85,15 @@ public class Level {
 		public void paint(Graphics g) {
 			Graphics2D g2d = (Graphics2D)g;
 			// Test Rectangle
-			g2d.rotate(Math.toRadians(rotation), 240+480/2, 240+480/2);
+			g2d.rotate(Math.toRadians(rotation), x + (width/2), y + (length/2));
 			g.setColor(Color.gray);
 			g.fillRect(x, y, width, length);
-			g2d.rotate(Math.toRadians(-rotation), 240+480/2, 240+480/2);
+			g2d.rotate(Math.toRadians(-rotation), x + (width/2), y + (length/2));
+			
+			// TODO: Move to update later,. just for testing
+			if (rotating) {
+				rotation += .01;
+			}
 		}
 		
 	}
@@ -104,10 +109,15 @@ public class Level {
 		public void paint(Graphics g) {
 			Graphics2D g2d = (Graphics2D)g;
 			// Test Rectangle
-			g2d.rotate(Math.toRadians(rotation), 240+480/2, 240+480/2);
+			g2d.rotate(Math.toRadians(rotation), x + (width/2), y + (length/2));
 			g.setColor(Color.red);
 			g.fillRect(x, y, width, length);
-			g2d.rotate(Math.toRadians(-rotation), 240+480/2, 240+480/2);
+			g2d.rotate(Math.toRadians(-rotation), x + (width/2), y + (length/2));
+			
+			// TODO: Move to update later,. just for testing
+				if (rotating) {
+					rotation += .2;
+				}
 		}
 		
 	}
